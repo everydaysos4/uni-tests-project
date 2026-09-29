@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
-import { UserDraft } from '../model/user-draft';
 
 export const useAddUserModal = (onAddUser, onClose, isOpen) => {
-  const [formData, setFormData] = useState(() => new UserDraft());
+  const [formData, setFormData] = useState({
+    fullName: '',
+    username: '',
+    email: '',
+    groupId: '',
+    status: 'active',
+  });
   const [submitError, setSubmitError] = useState('');
 
   useEffect(() => {
@@ -27,8 +32,16 @@ export const useAddUserModal = (onAddUser, onClose, isOpen) => {
     e.preventDefault();
     setSubmitError('');
 
+    const payload = {
+      fullName: formData.fullName.trim(),
+      username: formData.username.trim(),
+      email: formData.email.trim(),
+      groupId: Number(formData.groupId) || null,
+      status: formData.status,
+    };
+
     try {
-      await onAddUser(formData.toPayload());
+      await onAddUser(payload);
       onClose();
     } catch {
       setSubmitError('Не удалось добавить пользователя. Проверьте данные и повторите попытку.');
@@ -42,7 +55,7 @@ export const useAddUserModal = (onAddUser, onClose, isOpen) => {
   };
 
   const handleChange = (value, field) => {
-    setFormData((prev) => prev.withField(field, value));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   return {

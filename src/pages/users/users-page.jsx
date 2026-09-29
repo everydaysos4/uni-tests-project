@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import styles from './users-page.module.css';
 import { useSortHook } from './hooks/useSortHook';
 import { AddUserModal } from './ui/add-user-modal/add-user-modal';
-import { usersApi } from './api/users-api';
+import { getUsersData } from './api/get-users-data';
+import { getGroupsData } from './api/get-groups-data';
 import { UsersTable } from './ui/users-table/users-table';
 import { useUsersState } from './hooks/useUsersState';
+import { filterUsers } from './model/user-list';
 
 export const UsersPage = () => {
   const { users, setUsers, handleDeleteUser, handleAddUser } = useUsersState();
@@ -19,10 +21,7 @@ export const UsersPage = () => {
   useEffect(() => {
     const fetchPageData = async () => {
       try {
-        const [usersData, groupsData] = await Promise.all([
-          usersApi.getUsers(),
-          usersApi.getGroups(),
-        ]);
+        const [usersData, groupsData] = await Promise.all([getUsersData(), getGroupsData()]);
         setUsers(usersData);
         setGroups(groupsData);
       } catch {
@@ -35,12 +34,8 @@ export const UsersPage = () => {
     fetchPageData();
   }, [setUsers]);
 
-  const {
-    sortedItems: sortedUsers,
-    sortField,
-    sortOrder,
-    handleSort,
-  } = useSortHook(users, searchValue);
+  const filteredUsers = filterUsers(users, searchValue);
+  const { sortedItems: sortedUsers, sortField, sortOrder, handleSort } = useSortHook(filteredUsers);
 
   if (isLoading) {
     return <div>Загружаем сотрудников...</div>;

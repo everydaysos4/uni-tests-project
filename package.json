@@ -14,7 +14,6 @@
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage && npm run coverage:badges",
     "coverage:badges": "node scripts/generate-coverage-badges.mjs",
-    "benchmark": "node scripts/benchmark-users.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

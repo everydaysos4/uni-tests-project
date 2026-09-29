@@ -38,6 +38,13 @@ Team Directory — приложение для просмотра сотрудн
 
 Подробнее: [сценарии и покрытие](docs/testing.md).
 
+## Что тестируется
+
+- функции API `getUsersData`, `getGroupsData`, `addUser` и `deleteUser` с подменённым HTTP-клиентом;
+- чистые функции `filterUsers` и `sortUsers`;
+- хуки `useAddUserModal`, `useSortHook` и `useUsersState`;
+- компоненты страниц сотрудников и групп, форма добавления, таблица и маршрутизация приложения.
+
 ## Запуск
 
 Установить зависимости:

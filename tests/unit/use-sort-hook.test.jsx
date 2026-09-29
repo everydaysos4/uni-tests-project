@@ -18,8 +18,8 @@ describe('useSortHook', () => {
     expect(result.current.sortOrder).toBe('asc');
   });
 
-  it('принимает начальные поле, порядок и поисковый запрос', () => {
-    const { result } = renderHook(() => useSortHook(users, 'alpha', 'username', 'desc'));
+  it('принимает начальные поле и порядок', () => {
+    const { result } = renderHook(() => useSortHook([users[2]], 'username', 'desc'));
 
     expect(result.current.sortedItems.map(({ id }) => id)).toEqual([3]);
     expect(result.current.sortField).toBe('username');

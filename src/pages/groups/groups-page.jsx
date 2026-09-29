@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { usersApi } from '../users/api/users-api';
+import { getGroupsData } from '../users/api/get-groups-data';
+import { getUsersData } from '../users/api/get-users-data';
 import { STATUS_LABELS } from '../../shared/constants';
 import styles from './groups-page.module.css';
 
@@ -49,10 +50,7 @@ export const GroupsPage = () => {
   useEffect(() => {
     const fetchPageData = async () => {
       try {
-        const [groupsData, usersData] = await Promise.all([
-          usersApi.getGroups(),
-          usersApi.getUsers(),
-        ]);
+        const [groupsData, usersData] = await Promise.all([getGroupsData(), getUsersData()]);
 
         setGroups(groupsData);
         setUsers(usersData);

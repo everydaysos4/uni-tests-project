@@ -2,17 +2,16 @@ import { fireEvent, render, screen, waitFor, within } from '@testing-library/rea
 import toast from 'react-hot-toast';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { UsersPage } from '../../src/pages/users/users-page';
-import { usersApi } from '../../src/pages/users/api/users-api';
+import { addUser } from '../../src/pages/users/api/add-user';
+import { deleteUser } from '../../src/pages/users/api/delete-user';
+import { getGroupsData } from '../../src/pages/users/api/get-groups-data';
+import { getUsersData } from '../../src/pages/users/api/get-users-data';
 import { groups, users } from '../fixtures/users';
 
-vi.mock('../../src/pages/users/api/users-api', () => ({
-  usersApi: {
-    getUsers: vi.fn(),
-    getGroups: vi.fn(),
-    addUser: vi.fn(),
-    deleteUser: vi.fn(),
-  },
-}));
+vi.mock('../../src/pages/users/api/add-user', () => ({ addUser: vi.fn() }));
+vi.mock('../../src/pages/users/api/delete-user', () => ({ deleteUser: vi.fn() }));
+vi.mock('../../src/pages/users/api/get-groups-data', () => ({ getGroupsData: vi.fn() }));
+vi.mock('../../src/pages/users/api/get-users-data', () => ({ getUsersData: vi.fn() }));
 
 vi.mock('react-hot-toast', () => ({
   default: {
@@ -22,8 +21,8 @@ vi.mock('react-hot-toast', () => ({
 }));
 
 const renderLoadedPage = async () => {
-  usersApi.getUsers.mockResolvedValue(users);
-  usersApi.getGroups.mockResolvedValue(groups);
+  getUsersData.mockResolvedValue(users);
+  getGroupsData.mockResolvedValue(groups);
 
   render(<UsersPage />);
   expect(screen.getByText('Загружаем сотрудников...')).toBeVisible();
@@ -49,7 +48,7 @@ const fillRequiredFields = ({ fullName, username, email }) => {
 
 describe('UsersPage', () => {
   beforeEach(() => {
-    Object.values(usersApi).forEach((mock) => mock.mockReset());
+    [addUser, deleteUser, getGroupsData, getUsersData].forEach((mock) => mock.mockReset());
     toast.success.mockReset();
     toast.error.mockReset();
     vi.spyOn(console, 'error').mockImplementation(() => {});
@@ -101,7 +100,7 @@ describe('UsersPage', () => {
       groupId: 2,
       status: 'restricted',
     };
-    usersApi.addUser.mockResolvedValue(savedUser);
+    addUser.mockResolvedValue(savedUser);
 
     openModal();
     fillRequiredFields({
@@ -113,7 +112,7 @@ describe('UsersPage', () => {
     fireEvent.change(screen.getByLabelText('Статус'), { target: { value: 'restricted' } });
     fireEvent.click(screen.getByRole('button', { name: 'Добавить' }));
 
-    expect(usersApi.addUser).toHaveBeenCalledWith({
+    expect(addUser).toHaveBeenCalledWith({
       fullName: 'Новый Сотрудник',
       username: 'new.user',
       email: 'new@example.com',
@@ -127,7 +126,7 @@ describe('UsersPage', () => {
 
   it('при ошибке добавления сохраняет открытую форму, значения и список', async () => {
     await renderLoadedPage();
-    usersApi.addUser.mockRejectedValueOnce(new Error('server error'));
+    addUser.mockRejectedValueOnce(new Error('server error'));
 
     openModal();
     fillRequiredFields({
@@ -146,7 +145,7 @@ describe('UsersPage', () => {
 
   it('удаляет пользователя при успехе и сохраняет при ошибке API', async () => {
     await renderLoadedPage();
-    usersApi.deleteUser.mockResolvedValueOnce(undefined).mockRejectedValueOnce(new Error('server'));
+    deleteUser.mockResolvedValueOnce(undefined).mockRejectedValueOnce(new Error('server'));
 
     const borisRow = screen.getByText('Борис Волков').closest('tr');
     fireEvent.click(within(borisRow).getByRole('button'));
@@ -164,8 +163,8 @@ describe('UsersPage', () => {
   });
 
   it('показывает ошибку загрузки вместо таблицы', async () => {
-    usersApi.getUsers.mockRejectedValue(new Error('network'));
-    usersApi.getGroups.mockResolvedValue([]);
+    getUsersData.mockRejectedValue(new Error('network'));
+    getGroupsData.mockResolvedValue([]);
 
     render(<UsersPage />);
 

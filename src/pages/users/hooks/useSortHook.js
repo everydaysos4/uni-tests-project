@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
-import { UserDirectory } from '../model/user-directory';
+import { sortUsers } from '../model/user-list';
 
-export const useSortHook = (items, query = '', initialField = 'fullName', initialOrder = 'asc') => {
+export const useSortHook = (items, initialField = 'fullName', initialOrder = 'asc') => {
   const [sortField, setSortField] = useState(initialField);
   const [sortOrder, setSortOrder] = useState(initialOrder);
 
@@ -16,8 +16,8 @@ export const useSortHook = (items, query = '', initialField = 'fullName', initia
   };
 
   const sortedItems = useMemo(() => {
-    return new UserDirectory(items).find(query, sortField, sortOrder);
-  }, [items, query, sortField, sortOrder]);
+    return sortUsers(items, sortField, sortOrder);
+  }, [items, sortField, sortOrder]);
 
   return {
     sortedItems,

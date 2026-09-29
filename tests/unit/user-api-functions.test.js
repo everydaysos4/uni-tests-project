@@ -1,7 +1,10 @@
 import { describe, expect, it, vi } from 'vitest';
-import { UsersApi } from '../../src/pages/users/api/users-api';
+import { addUser } from '../../src/pages/users/api/add-user';
+import { deleteUser } from '../../src/pages/users/api/delete-user';
+import { getGroupsData } from '../../src/pages/users/api/get-groups-data';
+import { getUsersData } from '../../src/pages/users/api/get-users-data';
 
-describe('UsersApi', () => {
+describe('функции API пользователей', () => {
   it('получает пользователей и группы через подменённый HTTP-клиент', async () => {
     const client = {
       get: vi
@@ -9,10 +12,9 @@ describe('UsersApi', () => {
         .mockResolvedValueOnce({ data: ['user'] })
         .mockResolvedValueOnce({ data: ['group'] }),
     };
-    const api = new UsersApi(client);
 
-    await expect(api.getUsers()).resolves.toEqual(['user']);
-    await expect(api.getGroups()).resolves.toEqual(['group']);
+    await expect(getUsersData(client)).resolves.toEqual(['user']);
+    await expect(getGroupsData(client)).resolves.toEqual(['group']);
     expect(client.get).toHaveBeenNthCalledWith(1, '/users');
     expect(client.get).toHaveBeenNthCalledWith(2, '/groups');
   });
@@ -24,10 +26,9 @@ describe('UsersApi', () => {
       post: vi.fn().mockResolvedValue({ data: savedUser }),
       delete: vi.fn().mockResolvedValue(undefined),
     };
-    const api = new UsersApi(client);
 
-    await expect(api.addUser(payload)).resolves.toEqual(savedUser);
-    await expect(api.deleteUser(10)).resolves.toBeUndefined();
+    await expect(addUser(payload, client)).resolves.toEqual(savedUser);
+    await expect(deleteUser(10, client)).resolves.toBeUndefined();
     expect(client.post).toHaveBeenCalledWith('/users', payload);
     expect(client.delete).toHaveBeenCalledWith('/users/10');
   });

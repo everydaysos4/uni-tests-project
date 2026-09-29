@@ -5,19 +5,26 @@ import App from '../../src/app/app';
 import { groups, users } from '../fixtures/users';
 
 const apiMock = vi.hoisted(() => ({
-  getUsers: vi.fn(),
-  getGroups: vi.fn(),
+  getUsersData: vi.fn(),
+  getGroupsData: vi.fn(),
   addUser: vi.fn(),
   deleteUser: vi.fn(),
 }));
 
-vi.mock('../../src/pages/users/api/users-api', () => ({ usersApi: apiMock }));
+vi.mock('../../src/pages/users/api/get-users-data', () => ({
+  getUsersData: apiMock.getUsersData,
+}));
+vi.mock('../../src/pages/users/api/get-groups-data', () => ({
+  getGroupsData: apiMock.getGroupsData,
+}));
+vi.mock('../../src/pages/users/api/add-user', () => ({ addUser: apiMock.addUser }));
+vi.mock('../../src/pages/users/api/delete-user', () => ({ deleteUser: apiMock.deleteUser }));
 
 describe('маршруты приложения', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    apiMock.getUsers.mockResolvedValue(users);
-    apiMock.getGroups.mockResolvedValue(groups);
+    apiMock.getUsersData.mockResolvedValue(users);
+    apiMock.getGroupsData.mockResolvedValue(groups);
   });
 
   it('открывает Home и переходит на Users и Groups через навигацию', async () => {
