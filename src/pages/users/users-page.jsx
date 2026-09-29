@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './users-page.module.css';
 import { useSortHook } from './hooks/useSortHook';
 import { AddUserModal } from './ui/add-user-modal/add-user-modal';
-import { getUsersData } from './api/get-users-data';
-import { getGroupsData } from './api/get-groups-data';
+import { usersApi } from './api/users-api';
 import { UsersTable } from './ui/users-table/users-table';
 import { useUsersState } from './hooks/useUsersState';
 
@@ -14,32 +13,40 @@ export const UsersPage = () => {
   const [searchValue, setSearchValue] = useState('');
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    const fetchUsersData = async () => {
-      const usersData = await getUsersData();
-      setUsers(usersData);
+    const fetchPageData = async () => {
+      try {
+        const [usersData, groupsData] = await Promise.all([
+          usersApi.getUsers(),
+          usersApi.getGroups(),
+        ]);
+        setUsers(usersData);
+        setGroups(groupsData);
+      } catch {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
-    const fetchGroupsData = async () => {
-      const groupsData = await getGroupsData();
-      setGroups(groupsData);
-    };
-
-    fetchUsersData();
-    fetchGroupsData();
+    fetchPageData();
   }, [setUsers]);
 
-  const filteredUsers = users.filter((user) => {
-    const searchLower = searchValue.toLowerCase();
+  const { sortedItems: sortedUsers, sortField, sortOrder, handleSort } = useSortHook(
+    users,
+    searchValue,
+  );
 
-    return (
-      user.fullName.toLowerCase().includes(searchLower) ||
-      user.username.toLowerCase().includes(searchLower)
-    );
-  });
+  if (isLoading) {
+    return <div>Загружаем сотрудников...</div>;
+  }
 
-  const { sortedItems: sortedUsers, sortField, sortOrder, handleSort } = useSortHook(filteredUsers);
+  if (isError) {
+    return <div role="alert">Не удалось загрузить сотрудников. Повторите позже.</div>;
+  }
 
   return (
     <section className={styles.usersSection}>

@@ -1,6 +1,12 @@
 import { useMemo, useState } from 'react';
+import { UserDirectory } from '../model/user-directory';
 
-export const useSortHook = (items, initialField = 'fullName', initialOrder = 'asc') => {
+export const useSortHook = (
+  items,
+  query = '',
+  initialField = 'fullName',
+  initialOrder = 'asc',
+) => {
   const [sortField, setSortField] = useState(initialField);
   const [sortOrder, setSortOrder] = useState(initialOrder);
 
@@ -15,26 +21,8 @@ export const useSortHook = (items, initialField = 'fullName', initialOrder = 'as
   };
 
   const sortedItems = useMemo(() => {
-    return [...items].sort((a, b) => {
-      if (sortOrder === 'asc') {
-        if (sortField === 'groupId') {
-          if (a[sortField] > b[sortField]) return 1;
-          if (a[sortField] < b[sortField]) return -1;
-          return 0;
-        }
-
-        return a[sortField].localeCompare(b[sortField]);
-      }
-
-      if (sortField === 'groupId') {
-        if (a[sortField] < b[sortField]) return 1;
-        if (a[sortField] > b[sortField]) return -1;
-        return 0;
-      }
-
-      return b[sortField].localeCompare(a[sortField]);
-    });
-  }, [items, sortField, sortOrder]);
+    return new UserDirectory(items).find(query, sortField, sortOrder);
+  }, [items, query, sortField, sortOrder]);
 
   return {
     sortedItems,

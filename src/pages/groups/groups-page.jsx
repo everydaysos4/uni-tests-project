@@ -1,15 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import { getGroupsData } from '../users/api/get-groups-data';
-import { getUsersData } from '../users/api/get-users-data';
+import { usersApi } from '../users/api/users-api';
+import { STATUS_LABELS } from '../../shared/constants';
 import styles from './groups-page.module.css';
-
-const STATUS_LABELS = {
-  active: 'Активен',
-  onDuty: 'На смене',
-  offDuty: 'Вне смены',
-  restricted: 'Ограничен',
-  review: 'На проверке',
-};
 
 const STATUS_CLASSNAMES = {
   active: styles.statusActive,
@@ -57,7 +49,10 @@ export const GroupsPage = () => {
   useEffect(() => {
     const fetchPageData = async () => {
       try {
-        const [groupsData, usersData] = await Promise.all([getGroupsData(), getUsersData()]);
+        const [groupsData, usersData] = await Promise.all([
+          usersApi.getGroups(),
+          usersApi.getUsers(),
+        ]);
 
         setGroups(groupsData);
         setUsers(usersData);

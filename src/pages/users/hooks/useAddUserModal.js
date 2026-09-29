@@ -1,13 +1,9 @@
 import { useEffect, useState } from 'react';
+import { UserDraft } from '../model/user-draft';
 
 export const useAddUserModal = (onAddUser, onClose, isOpen) => {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    username: '',
-    email: '',
-    groupId: '',
-    status: 'active',
-  });
+  const [formData, setFormData] = useState(() => new UserDraft());
+  const [submitError, setSubmitError] = useState('');
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -27,19 +23,16 @@ export const useAddUserModal = (onAddUser, onClose, isOpen) => {
     };
   }, [isOpen, onClose]);
 
-  const handleSumbit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitError('');
 
-    const payload = {
-      fullName: formData.fullName.trim(),
-      username: formData.username.trim(),
-      email: formData.email.trim(),
-      groupId: Number(formData.groupId) || null,
-      status: formData.status,
-    };
-
-    await onAddUser(payload);
-    onClose();
+    try {
+      await onAddUser(formData.toPayload());
+      onClose();
+    } catch {
+      setSubmitError('Не удалось добавить пользователя. Проверьте данные и повторите попытку.');
+    }
   };
 
   const handleOverlayClick = (e) => {
@@ -49,12 +42,13 @@ export const useAddUserModal = (onAddUser, onClose, isOpen) => {
   };
 
   const handleChange = (value, field) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    setFormData((prev) => prev.withField(field, value));
   };
 
   return {
     formData,
-    handleSumbit,
+    submitError,
+    handleSubmit,
     handleOverlayClick,
     handleChange,
   };

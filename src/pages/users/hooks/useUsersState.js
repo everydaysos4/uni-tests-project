@@ -1,15 +1,14 @@
 import toast from 'react-hot-toast';
-import { deleteUser } from '../api/delete-user';
-import { addUser } from '../api/add-user';
+import { usersApi } from '../api/users-api';
 import { useState } from 'react';
 
-export const useUsersState = () => {
+export const useUsersState = (api = usersApi) => {
   const [users, setUsers] = useState([]);
   const handleDeleteUser = async (userId) => {
     const username = users.find((user) => user.id === userId)?.username;
 
     try {
-      await deleteUser(userId);
+      await api.deleteUser(userId);
       setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
       toast.success(`Пользователь ${username} удалён`);
     } catch (err) {
@@ -20,12 +19,13 @@ export const useUsersState = () => {
 
   const handleAddUser = async (payload) => {
     try {
-      const newUserData = await addUser(payload);
+      const newUserData = await api.addUser(payload);
       setUsers((prevUsers) => [...prevUsers, newUserData]);
       toast.success(`Пользователь ${payload.username} добавлен`);
     } catch (err) {
       toast.error(`Не удалось добавить пользователя ${payload.username}`);
       console.error('Error adding user:', err);
+      throw err;
     }
   };
 

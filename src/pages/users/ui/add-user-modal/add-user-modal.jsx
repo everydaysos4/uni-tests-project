@@ -3,14 +3,9 @@ import styles from './add-user-modal.module.css';
 import { useAddUserModal } from '../../hooks/useAddUserModal';
 import { STATUS_LABELS } from '../../../../shared/constants';
 
-export const AddUserModal = ({ isOpen, onClose, groups, onAddUser 
-  
-}) => {
-  const { formData, handleSumbit, handleOverlayClick, handleChange } = useAddUserModal(
-    onAddUser,
-    onClose,
-    isOpen,
-  );
+export const AddUserModal = ({ isOpen, onClose, groups, onAddUser }) => {
+  const { formData, submitError, handleSubmit, handleOverlayClick, handleChange } =
+    useAddUserModal(onAddUser, onClose, isOpen);
 
   const showStatusOptions = () => {
     return Object.entries(STATUS_LABELS).map(([value, label]) => (
@@ -21,8 +16,8 @@ export const AddUserModal = ({ isOpen, onClose, groups, onAddUser
   };
 
   return createPortal(
-    <div className={styles.modalOverlay} onClick={handleOverlayClick}>
-      <div className={styles.modalContent}>
+    <div className={styles.modalOverlay} onClick={handleOverlayClick} data-testid="modal-overlay">
+      <div className={styles.modalContent} role="dialog" aria-modal="true">
         <div className={styles.modalHeader}>
           <h2 className={styles.title}>Добавить пользователя</h2>
           <button className={styles.closeButton} onClick={onClose} aria-label="Закрыть">
@@ -30,7 +25,7 @@ export const AddUserModal = ({ isOpen, onClose, groups, onAddUser
           </button>
         </div>
         <div className={styles.modalBody}>
-          <form className={styles.form} onSubmit={handleSumbit}>
+          <form className={styles.form} onSubmit={handleSubmit}>
             <label htmlFor="fullName">Полное имя</label>
             <input
               type="text"
@@ -92,6 +87,7 @@ export const AddUserModal = ({ isOpen, onClose, groups, onAddUser
             <button className={styles.formButton} type="submit">
               Добавить
             </button>
+            {submitError && <p role="alert">{submitError}</p>}
           </form>
         </div>
       </div>
