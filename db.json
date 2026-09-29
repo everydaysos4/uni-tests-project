@@ -31,7 +31,7 @@
       "id": 27,
       "fullName": "Мещеряков Леонид Ильич",
       "username": "leonid.meshcheryakov",
-      "email": "leonid.meshcheryakov@safeboard.local",
+      "email": "leonid.meshcheryakov@example.local",
       "groupId": 3,
       "status": "active"
     },
@@ -39,7 +39,7 @@
       "id": 49,
       "fullName": "Петрова Ульяна Сергеевна",
       "username": "ulyana.petrova",
-      "email": "ulyana.petrova@safeboard.local",
+      "email": "ulyana.petrova@example.local",
       "groupId": null,
       "status": "offDuty"
     },
@@ -47,7 +47,7 @@
       "id": 31,
       "fullName": "Рябов Георгий Михайлович",
       "username": "georgiy.ryabov",
-      "email": "georgiy.ryabov@safeboard.local",
+      "email": "georgiy.ryabov@example.local",
       "groupId": 4,
       "status": "review"
     },
@@ -55,7 +55,7 @@
       "id": 16,
       "fullName": "Чернов Артем Павлович",
       "username": "artem.chernov",
-      "email": "artem.chernov@safeboard.local",
+      "email": "artem.chernov@example.local",
       "groupId": 2,
       "status": "active"
     },
@@ -63,7 +63,7 @@
       "id": 53,
       "fullName": "Фомин Марк Ильич",
       "username": "mark.fomin",
-      "email": "mark.fomin@safeboard.local",
+      "email": "mark.fomin@example.local",
       "groupId": null,
       "status": "review"
     },
@@ -71,7 +71,7 @@
       "id": 56,
       "fullName": "Юдина Анастасия Олеговна",
       "username": "anastasiya.yudina",
-      "email": "anastasiya.yudina@safeboard.local",
+      "email": "anastasiya.yudina@example.local",
       "groupId": null,
       "status": "active"
     },
@@ -79,7 +79,7 @@
       "id": 38,
       "fullName": "Барсукова Василиса Игоревна",
       "username": "vasilisa.barsukova",
-      "email": "vasilisa.barsukova@safeboard.local",
+      "email": "vasilisa.barsukova@example.local",
       "groupId": 5,
       "status": "onDuty"
     },
@@ -87,7 +87,7 @@
       "id": 23,
       "fullName": "Дементьев Роман Игоревич",
       "username": "roman.dementev",
-      "email": "roman.dementev@safeboard.local",
+      "email": "roman.dementev@example.local",
       "groupId": 3,
       "status": "offDuty"
     },
@@ -95,7 +95,7 @@
       "id": 3,
       "fullName": "Громов Максим Игоревич",
       "username": "maksim.gromov",
-      "email": "maksim.gromov@safeboard.local",
+      "email": "maksim.gromov@example.local",
       "groupId": 1,
       "status": "active"
     },
@@ -103,7 +103,7 @@
       "id": 43,
       "fullName": "Исаев Матвей Викторович",
       "username": "matvey.isaev",
-      "email": "matvey.isaev@safeboard.local",
+      "email": "matvey.isaev@example.local",
       "groupId": 5,
       "status": "onDuty"
     },
@@ -111,7 +111,7 @@
       "id": 55,
       "fullName": "Шилов Петр Андреевич",
       "username": "petr.shilov",
-      "email": "petr.shilov@safeboard.local",
+      "email": "petr.shilov@example.local",
       "groupId": null,
       "status": "offDuty"
     },
@@ -119,7 +119,7 @@
       "id": 28,
       "fullName": "Назарова Алина Викторовна",
       "username": "alina.nazarova",
-      "email": "alina.nazarova@safeboard.local",
+      "email": "alina.nazarova@example.local",
       "groupId": 4,
       "status": "active"
     },
@@ -127,7 +127,7 @@
       "id": 2,
       "fullName": "Белова Ирина Павловна",
       "username": "irina.belova",
-      "email": "irina.belova@safeboard.local",
+      "email": "irina.belova@example.local",
       "groupId": 1,
       "status": "onDuty"
     },
@@ -135,7 +135,7 @@
       "id": 20,
       "fullName": "Богданова Дарья Алексеевна",
       "username": "darya.bogdanova",
-      "email": "darya.bogdanova@safeboard.local",
+      "email": "darya.bogdanova@example.local",
       "groupId": 3,
       "status": "onDuty"
     },
@@ -143,7 +143,7 @@
       "id": 40,
       "fullName": "Голубева Жанна Маратовна",
       "username": "zhanna.golubeva",
-      "email": "zhanna.golubeva@safeboard.local",
+      "email": "zhanna.golubeva@example.local",
       "groupId": 5,
       "status": "review"
     },
@@ -151,7 +151,7 @@
       "id": 45,
       "fullName": "Лобанов Олег Дмитриевич",
       "username": "oleg.lobanov",
-      "email": "oleg.lobanov@safeboard.local",
+      "email": "oleg.lobanov@example.local",
       "groupId": 5,
       "status": "active"
     },
@@ -159,7 +159,7 @@
       "id": 13,
       "fullName": "Тихонова Мария Евгеньевна",
       "username": "mariya.tikhonova",
-      "email": "mariya.tikhonova@safeboard.local",
+      "email": "mariya.tikhonova@example.local",
       "groupId": 2,
       "status": "active"
     },
@@ -167,7 +167,7 @@
       "id": 8,
       "fullName": "Новикова Татьяна Романовна",
       "username": "tatyana.novikova",
-      "email": "tatyana.novikova@safeboard.local",
+      "email": "tatyana.novikova@example.local",
       "groupId": 1,
       "status": "active"
     },
@@ -175,7 +175,7 @@
       "id": 4,
       "fullName": "Ершова Наталья Викторовна",
       "username": "natalya.ershova",
-      "email": "natalya.ershova@safeboard.local",
+      "email": "natalya.ershova@example.local",
       "groupId": 1,
       "status": "offDuty"
     },
@@ -183,7 +183,7 @@
       "id": 47,
       "fullName": "Нестерова София Игоревна",
       "username": "sofia.nesterova",
-      "email": "sofia.nesterova@safeboard.local",
+      "email": "sofia.nesterova@example.local",
       "groupId": null,
       "status": "review"
     },
@@ -191,7 +191,7 @@
       "id": 12,
       "fullName": "Савельев Константин Валерьевич",
       "username": "konstantin.savelev",
-      "email": "konstantin.savelev@safeboard.local",
+      "email": "konstantin.savelev@example.local",
       "groupId": 2,
       "status": "offDuty"
     },
@@ -199,7 +199,7 @@
       "id": 33,
       "fullName": "Тарасов Игорь Сергеевич",
       "username": "igor.tarasov",
-      "email": "igor.tarasov@safeboard.local",
+      "email": "igor.tarasov@example.local",
       "groupId": 4,
       "status": "restricted"
     },
@@ -207,7 +207,7 @@
       "id": 35,
       "fullName": "Царев Михаил Олегович",
       "username": "mihail.tsarev",
-      "email": "mihail.tsarev@safeboard.local",
+      "email": "mihail.tsarev@example.local",
       "groupId": 4,
       "status": "onDuty"
     },
@@ -215,7 +215,7 @@
       "id": 44,
       "fullName": "Колесникова Нина Андреевна",
       "username": "nina.kolesnikova",
-      "email": "nina.kolesnikova@safeboard.local",
+      "email": "nina.kolesnikova@example.local",
       "groupId": 5,
       "status": "restricted"
     },
@@ -223,7 +223,7 @@
       "id": 15,
       "fullName": "Федосеева Юлия Ильинична",
       "username": "yuliya.fedoseeva",
-      "email": "yuliya.fedoseeva@safeboard.local",
+      "email": "yuliya.fedoseeva@example.local",
       "groupId": 2,
       "status": "review"
     },
@@ -231,7 +231,7 @@
       "id": 46,
       "fullName": "Мартынов Руслан Павлович",
       "username": "ruslan.martynov",
-      "email": "ruslan.martynov@safeboard.local",
+      "email": "ruslan.martynov@example.local",
       "groupId": 5,
       "status": "offDuty"
     },
@@ -239,7 +239,7 @@
       "id": 5,
       "fullName": "Крылов Дмитрий Андреевич",
       "username": "dmitriy.krylov",
-      "email": "dmitriy.krylov@safeboard.local",
+      "email": "dmitriy.krylov@example.local",
       "groupId": 1,
       "status": "onDuty"
     },
@@ -247,7 +247,7 @@
       "id": 1,
       "fullName": "Воронов Алексей Сергеевич",
       "username": "aleksey.voronov",
-      "email": "aleksey.voronov@safeboard.local",
+      "email": "aleksey.voronov@example.local",
       "groupId": 1,
       "status": "active"
     },
@@ -255,7 +255,7 @@
       "id": 7,
       "fullName": "Миронов Сергей Олегович",
       "username": "sergey.mironov",
-      "email": "sergey.mironov@safeboard.local",
+      "email": "sergey.mironov@example.local",
       "groupId": 1,
       "status": "review"
     },
@@ -263,7 +263,7 @@
       "id": 9,
       "fullName": "Орлов Павел Денисович",
       "username": "pavel.orlov",
-      "email": "pavel.orlov@safeboard.local",
+      "email": "pavel.orlov@example.local",
       "groupId": 1,
       "status": "restricted"
     },
@@ -271,7 +271,7 @@
       "id": 37,
       "fullName": "Анисимов Аркадий Павлович",
       "username": "arkadiy.anisimov",
-      "email": "arkadiy.anisimov@safeboard.local",
+      "email": "arkadiy.anisimov@example.local",
       "groupId": 5,
       "status": "active"
     },
@@ -279,7 +279,7 @@
       "id": 24,
       "fullName": "Зорина Светлана Павловна",
       "username": "svetlana.zorina",
-      "email": "svetlana.zorina@safeboard.local",
+      "email": "svetlana.zorina@example.local",
       "groupId": 3,
       "status": "active"
     },
@@ -287,7 +287,7 @@
       "id": 36,
       "fullName": "Щербакова Полина Викторовна",
       "username": "polina.shcherbakova",
-      "email": "polina.shcherbakova@safeboard.local",
+      "email": "polina.shcherbakova@example.local",
       "groupId": 4,
       "status": "offDuty"
     },
@@ -295,7 +295,7 @@
       "id": 54,
       "fullName": "Чеснокова Инна Сергеевна",
       "username": "inna.chesnokova",
-      "email": "inna.chesnokova@safeboard.local",
+      "email": "inna.chesnokova@example.local",
       "groupId": null,
       "status": "active"
     },
@@ -303,7 +303,7 @@
       "id": 14,
       "fullName": "Ушаков Егор Сергеевич",
       "username": "egor.ushakov",
-      "email": "egor.ushakov@safeboard.local",
+      "email": "egor.ushakov@example.local",
       "groupId": 2,
       "status": "onDuty"
     },
@@ -311,7 +311,7 @@
       "id": 6,
       "fullName": "Лаврова Ольга Николаевна",
       "username": "olga.lavrova",
-      "email": "olga.lavrova@safeboard.local",
+      "email": "olga.lavrova@example.local",
       "groupId": 1,
       "status": "active"
     },
@@ -319,7 +319,7 @@
       "id": 32,
       "fullName": "Соколова Диана Максимовна",
       "username": "diana.sokolova",
-      "email": "diana.sokolova@safeboard.local",
+      "email": "diana.sokolova@example.local",
       "groupId": 4,
       "status": "active"
     },
@@ -327,7 +327,7 @@
       "id": 30,
       "fullName": "Панкратова Валерия Денисовна",
       "username": "valeriya.pankratova",
-      "email": "valeriya.pankratova@safeboard.local",
+      "email": "valeriya.pankratova@example.local",
       "groupId": 4,
       "status": "offDuty"
     },
@@ -335,7 +335,7 @@
       "id": 51,
       "fullName": "Самсонова Яна Викторовна",
       "username": "yana.samsonova",
-      "email": "yana.samsonova@safeboard.local",
+      "email": "yana.samsonova@example.local",
       "groupId": null,
       "status": "active"
     },
@@ -343,7 +343,7 @@
       "id": 18,
       "fullName": "Яковлев Илья Викторович",
       "username": "ilya.yakovlev",
-      "email": "ilya.yakovlev@safeboard.local",
+      "email": "ilya.yakovlev@example.local",
       "groupId": 2,
       "status": "offDuty"
     },
@@ -351,7 +351,7 @@
       "id": 10,
       "fullName": "Поляков Андрей Михайлович",
       "username": "andrey.polyakov",
-      "email": "andrey.polyakov@safeboard.local",
+      "email": "andrey.polyakov@example.local",
       "groupId": 2,
       "status": "onDuty"
     },
@@ -359,7 +359,7 @@
       "id": 21,
       "fullName": "Власов Никита Романович",
       "username": "nikita.vlasov",
-      "email": "nikita.vlasov@safeboard.local",
+      "email": "nikita.vlasov@example.local",
       "groupId": 3,
       "status": "active"
     },
@@ -367,7 +367,7 @@
       "id": 29,
       "fullName": "Осипов Борис Евгеньевич",
       "username": "boris.osipov",
-      "email": "boris.osipov@safeboard.local",
+      "email": "boris.osipov@example.local",
       "groupId": 4,
       "status": "onDuty"
     },
@@ -375,7 +375,7 @@
       "id": 52,
       "fullName": "Трофимов Эдуард Павлович",
       "username": "eduard.trofimov",
-      "email": "eduard.trofimov@safeboard.local",
+      "email": "eduard.trofimov@example.local",
       "groupId": null,
       "status": "onDuty"
     },
@@ -383,7 +383,7 @@
       "id": 42,
       "fullName": "Жукова Карина Олеговна",
       "username": "karina.zhukova",
-      "email": "karina.zhukova@safeboard.local",
+      "email": "karina.zhukova@example.local",
       "groupId": 5,
       "status": "active"
     },
@@ -391,7 +391,7 @@
       "id": 41,
       "fullName": "Дорохов Иван Сергеевич",
       "username": "ivan.dorokhov",
-      "email": "ivan.dorokhov@safeboard.local",
+      "email": "ivan.dorokhov@example.local",
       "groupId": 5,
       "status": "offDuty"
     },
@@ -399,7 +399,7 @@
       "id": 39,
       "fullName": "Виноградов Денис Алексеевич",
       "username": "denis.vinogradov",
-      "email": "denis.vinogradov@safeboard.local",
+      "email": "denis.vinogradov@example.local",
       "groupId": 5,
       "status": "active"
     },
@@ -407,7 +407,7 @@
       "id": 25,
       "fullName": "Игнатов Кирилл Андреевич",
       "username": "kirill.ignatov",
-      "email": "kirill.ignatov@safeboard.local",
+      "email": "kirill.ignatov@example.local",
       "groupId": 3,
       "status": "onDuty"
     },
@@ -415,7 +415,7 @@
       "id": 48,
       "fullName": "Овчинников Тимур Андреевич",
       "username": "timur.ovchinnikov",
-      "email": "timur.ovchinnikov@safeboard.local",
+      "email": "timur.ovchinnikov@example.local",
       "groupId": null,
       "status": "active"
     },
@@ -423,7 +423,7 @@
       "id": 34,
       "fullName": "Харитонова Лидия Андреевна",
       "username": "lidiya.kharitonova",
-      "email": "lidiya.kharitonova@safeboard.local",
+      "email": "lidiya.kharitonova@example.local",
       "groupId": 4,
       "status": "active"
     },
@@ -431,7 +431,7 @@
       "id": 11,
       "fullName": "Романова Виктория Артемовна",
       "username": "viktoriya.romanova",
-      "email": "viktoriya.romanova@safeboard.local",
+      "email": "viktoriya.romanova@example.local",
       "groupId": 2,
       "status": "active"
     },
@@ -439,7 +439,7 @@
       "id": 22,
       "fullName": "Галкина Елена Сергеевна",
       "username": "elena.galkina",
-      "email": "elena.galkina@safeboard.local",
+      "email": "elena.galkina@example.local",
       "groupId": 3,
       "status": "review"
     },
@@ -447,7 +447,7 @@
       "id": 26,
       "fullName": "Карпова Вероника Олеговна",
       "username": "veronika.karpova",
-      "email": "veronika.karpova@safeboard.local",
+      "email": "veronika.karpova@example.local",
       "groupId": 3,
       "status": "restricted"
     },
@@ -455,7 +455,7 @@
       "id": 19,
       "fullName": "Абрамов Антон Дмитриевич",
       "username": "anton.abramov",
-      "email": "anton.abramov@safeboard.local",
+      "email": "anton.abramov@example.local",
       "groupId": 3,
       "status": "active"
     },
@@ -463,7 +463,7 @@
       "id": 50,
       "fullName": "Родионов Филипп Олегович",
       "username": "filipp.rodionov",
-      "email": "filipp.rodionov@safeboard.local",
+      "email": "filipp.rodionov@example.local",
       "groupId": null,
       "status": "restricted"
     },
@@ -471,7 +471,7 @@
       "id": 17,
       "fullName": "Шубина Ксения Олеговна",
       "username": "kseniya.shubina",
-      "email": "kseniya.shubina@safeboard.local",
+      "email": "kseniya.shubina@example.local",
       "groupId": 2,
       "status": "restricted"
     }

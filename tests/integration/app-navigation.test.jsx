@@ -27,8 +27,8 @@ describe('маршруты приложения', () => {
       </MemoryRouter>,
     );
 
-    expect(screen.getByRole('heading', { name: /PERSKY SAFEBOARD_/ })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'PERSKY SAFEBOARD_' })).toHaveAttribute(
+    expect(screen.getByRole('heading', { name: /TEAM DIRECTORY/ })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'TEAM DIRECTORY' })).toHaveAttribute(
       'aria-current',
       'page',
     );
@@ -41,9 +41,7 @@ describe('маршруты приложения', () => {
     );
 
     fireEvent.click(screen.getByRole('link', { name: 'Рабочие группы' }));
-    expect(
-      await screen.findByRole('heading', { name: 'Контуры команд SafeBoard' }),
-    ).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Команды и участники' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Рабочие группы' })).toHaveAttribute(
       'aria-current',
       'page',

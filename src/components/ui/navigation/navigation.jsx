@@ -8,7 +8,7 @@ export const Navigation = () => {
         to="/"
         className={({ isActive }) => `${styles.item} ${isActive ? styles.itemActive : ''}`}
       >
-        PERSKY SAFEBOARD_
+        TEAM DIRECTORY
       </NavLink>
       <NavLink
         to="/users"

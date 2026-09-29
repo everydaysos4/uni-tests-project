@@ -95,7 +95,7 @@ export const GroupsPage = () => {
     <section className={styles.groupsSection}>
       <div className={styles.heroCard}>
         <p className={styles.kicker}>Рабочие группы</p>
-        <h1 className={styles.title}>Контуры команд SafeBoard</h1>
+        <h1 className={styles.title}>Команды и участники</h1>
         <p className={styles.description}>
           Обзор распределения специалистов по ключевым security-направлениям платформы. Карточки
           помогают быстро увидеть состав каждой группы и сотрудников без назначения.
