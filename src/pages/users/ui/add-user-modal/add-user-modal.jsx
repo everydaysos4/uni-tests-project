@@ -4,8 +4,11 @@ import { useAddUserModal } from '../../hooks/useAddUserModal';
 import { STATUS_LABELS } from '../../../../shared/constants';
 
 export const AddUserModal = ({ isOpen, onClose, groups, onAddUser }) => {
-  const { formData, submitError, handleSubmit, handleOverlayClick, handleChange } =
-    useAddUserModal(onAddUser, onClose, isOpen);
+  const { formData, submitError, handleSubmit, handleOverlayClick, handleChange } = useAddUserModal(
+    onAddUser,
+    onClose,
+    isOpen,
+  );
 
   const showStatusOptions = () => {
     return Object.entries(STATUS_LABELS).map(([value, label]) => (

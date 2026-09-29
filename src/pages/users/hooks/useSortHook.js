@@ -1,12 +1,7 @@
 import { useMemo, useState } from 'react';
 import { UserDirectory } from '../model/user-directory';
 
-export const useSortHook = (
-  items,
-  query = '',
-  initialField = 'fullName',
-  initialOrder = 'asc',
-) => {
+export const useSortHook = (items, query = '', initialField = 'fullName', initialOrder = 'asc') => {
   const [sortField, setSortField] = useState(initialField);
   const [sortOrder, setSortOrder] = useState(initialOrder);
 

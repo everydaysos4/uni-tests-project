@@ -35,10 +35,12 @@ export const UsersPage = () => {
     fetchPageData();
   }, [setUsers]);
 
-  const { sortedItems: sortedUsers, sortField, sortOrder, handleSort } = useSortHook(
-    users,
-    searchValue,
-  );
+  const {
+    sortedItems: sortedUsers,
+    sortField,
+    sortOrder,
+    handleSort,
+  } = useSortHook(users, searchValue);
 
   if (isLoading) {
     return <div>Загружаем сотрудников...</div>;

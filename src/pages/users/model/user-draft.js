@@ -1,11 +1,5 @@
 export class UserDraft {
-  constructor({
-    fullName = '',
-    username = '',
-    email = '',
-    groupId = '',
-    status = 'active',
-  } = {}) {
+  constructor({ fullName = '', username = '', email = '', groupId = '', status = 'active' } = {}) {
     this.fullName = fullName;
     this.username = username;
     this.email = email;
