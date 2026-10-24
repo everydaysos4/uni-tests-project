@@ -1,95 +1,92 @@
-# Team Directory
+# Лабораторная работа №2
 
-![Lines](badges/coverage-lines.svg)
-![Branches](badges/coverage-branches.svg)
-![Statements](badges/coverage-statements.svg)
+Тема: «Разработка сценариев автоматизации с использованием Selenium WebDriver».
 
-Team Directory — приложение для просмотра сотрудников и рабочих групп.
+В проекте выполнены все обязательные задания и дополнительное задание 3.2
+с действиями мышью. Задание 6.1 с мокированием API не выполнялось.
 
-## Возможности
+## Структура проекта
 
-- поиск сотрудников по имени и username;
-- сортировка таблицы;
-- добавление и удаление сотрудников;
-- просмотр состава групп;
-- отображение состояний загрузки и ошибок API.
-
-## Стек
-
-- React 19;
-- React Router 7;
-- Vite 8;
-- Axios;
-- JSON Server;
-- ESLint;
-- Prettier;
-- CSS Modules;
-- JavaScript.
-
-## Технологии тестирования
-
-- Vitest;
-- React Testing Library;
-- `jest-dom`;
-- `user-event` и `fireEvent`;
-- jsdom;
-- V8 Coverage;
-- mock-объекты и подмена API-границы.
-
-Подробнее: [сценарии и покрытие](docs/testing.md).
-
-## Что тестируется
-
-- функции API `getUsersData`, `getGroupsData`, `addUser` и `deleteUser` с подменённым HTTP-клиентом;
-- чистые функции `filterUsers` и `sortUsers`;
-- хуки `useAddUserModal`, `useSortHook` и `useUsersState`;
-- компоненты страниц сотрудников и групп, форма добавления, таблица и маршрутизация приложения.
-
-## Запуск
-
-Установить зависимости:
-
-```bash
-npm ci
+```text
+selenium_lab02/
+├── tests/
+│   └── test_saucedemo.py   # весь код лабораторной работы
+├── screenshots/            # скриншоты после запуска
+├── pyproject.toml           # зависимости и настройки PyTest
+├── README.md                # описание
 ```
 
-Запустить API:
+## Установка и запуск
+
+Требуется Python 3.10 или новее и Google Chrome.
 
 ```bash
-npm run server
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install .
+python -m pytest
 ```
 
-Запустить frontend:
+При успешном запуске ожидается результат `6 passed`.
+
+Для повторного запуска достаточно выполнить:
 
 ```bash
-npm run dev
+source .venv/bin/activate
+python -m pytest`
 ```
 
-- frontend: `http://localhost:5173`;
-- API: `http://localhost:3001`.
+## Выполненные задания
 
-## Проверки
+### Этап 0. Подготовка
+
+Зависимости указаны в `pyproject.toml`. Фикстура `driver` перед каждым
+тестом открывает Chrome, а в блоке `finally` вызывает `quit()`.
+WebDriverManager автоматически подбирает ChromeDriver.
+
+### Задание 1.1. Авторизация
+
+Тест `test_authorization` открывает Saucedemo, находит поле логина по ID,
+поле пароля по NAME, кнопку Login по CSS-классу и входит как
+`standard_user`. После входа проверяется страница Inventory.
+
+### Задания 2.1 и 2.2. Товары и корзина
+
+Тест `test_products_and_cart` получает все карточки товаров и выводит
+названия и цены первых трёх. Через XPath находится кнопка внутри карточки
+`Sauce Labs Backpack`. После добавления тест открывает корзину и с помощью
+`WebDriverWait` проверяет название товара.
+
+### Задание 3.1. Сортировка
+
+Тест `test_sorting` выбирает в элементе `<select>` значение `hilo`.
+Цены преобразуются из строк в числа. Проверяется, что список отсортирован
+по убыванию и первым показан товар с максимальной ценой.
+
+### Дополнительное задание 3.2. Действия мышью
+
+Тест `test_mouse_actions` через `ActionChains` наводит указатель на
+изображение товара и выполняет правый клик по кнопке Add to cart.
+Selenium выполняет правый клик, но не может управлять нативным контекстным
+меню операционной системы, потому что оно не является частью HTML-страницы.
+
+### Задание 4.1. Новая вкладка
+
+Тест `test_new_tab` нажимает ссылку Twitter, получает дескрипторы вкладок,
+переключается на новую вкладку и проверяет `twitter.com` или `x.com` в URL.
+Затем новая вкладка закрывается, а управление возвращается в магазин.
+
+### Задание 5.1. Негативный сценарий
+
+Тест `test_locked_user` выходит из системы и пытается войти как
+`locked_out_user`. После появления сообщения об ошибке сохраняется
+`screenshots/locked_user_error.png`.
+
+## Отдельный запуск теста
 
 ```bash
-npm run test:run
-npm run test:coverage
-npm run lint
-npm run format:check
-npm run build
+python -m pytest tests/test_saucedemo.py::test_sorting
 ```
 
-Тесты не требуют запущенного API. HTML-отчёт создаётся в `coverage/index.html`.
-
-## Покрытие
-
-| Lines | Branches | Statements | Functions |
-| ----: | -------: | ---------: | --------: |
-|  100% |     100% |       100% |      100% |
-
-Покрытие считается для прикладных JavaScript/JSX-файлов в `src`; техническая точка входа `main.jsx`
-исключена.
-
-## CI
-
-[GitHub Actions](https://github.com/everydaysos4/uni-tests-project/actions/workflows/ci.yml) при каждом push запускает установку
-зависимостей, lint, проверку форматирования, тесты с покрытием и production build.
+Исходный код лабораторной находится в одном файле:
+`tests/test_saucedemo.py`.
