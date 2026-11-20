@@ -1,58 +1,25 @@
-from pathlib import Path
-
 import pytest
-from selenium import webdriver
-from selenium.webdriver import ActionChains
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select, WebDriverWait
-from webdriver_manager.chrome import ChromeDriverManager
 
 
 URL = "https://www.saucedemo.com/"
 WAIT_TIME = 10
-SCREENSHOTS = Path(__file__).parent.parent / "screenshots"
 
 # Локаторы из заданий
 USERNAME = (By.ID, "user-name")
 PASSWORD = (By.NAME, "password")
 LOGIN_BUTTON = (By.CSS_SELECTOR, ".submit-button")
 PRODUCTS = (By.CSS_SELECTOR, ".inventory_item")
-PRODUCT_NAME = (By.CSS_SELECTOR, ".inventory_item_name")
 PRODUCT_PRICE = (By.CSS_SELECTOR, ".inventory_item_price")
-CART = (By.CSS_SELECTOR, ".shopping_cart_link")
+ADD_BACKPACK = (By.ID, "add-to-cart-sauce-labs-backpack")
+REMOVE_BACKPACK = (By.ID, "remove-sauce-labs-backpack")
 CART_BADGE = (By.CSS_SELECTOR, ".shopping_cart_badge")
-CART_PRODUCT_NAME = (By.CSS_SELECTOR, ".cart_item .inventory_item_name")
 SORT = (By.CSS_SELECTOR, ".product_sort_container")
-PRODUCT_IMAGE = (By.CSS_SELECTOR, ".inventory_item_img img")
-SOCIAL_X = (By.CSS_SELECTOR, '[data-test="social-x"]')
 MENU = (By.ID, "react-burger-menu-btn")
 LOGOUT = (By.ID, "logout_sidebar_link")
 ERROR = (By.CSS_SELECTOR, '[data-test="error"]')
-
-# XPath связывает название конкретного товара с кнопкой в той же карточке.
-BACKPACK_BUTTON = (
-    By.XPATH,
-    "//div[@class='inventory_item']"
-    "[.//div[text()='Sauce Labs Backpack']]//button",
-)
-
-
-@pytest.fixture
-def driver():
-    """Открывает отдельный браузер для теста и закрывает его после теста."""
-    SCREENSHOTS.mkdir(exist_ok=True)
-    browser = webdriver.Chrome(
-        service=Service(ChromeDriverManager().install())
-    )
-    browser.maximize_window()
-
-    try:
-        yield browser
-    finally:
-        browser.quit()
 
 
 def enter_credentials(driver, username):
@@ -85,7 +52,9 @@ def get_prices(driver):
     return [float(element.text.replace("$", "")) for element in elements]
 
 
-# Задание 1.1. Авторизация
+# Задание 1.2. Авторизация
+@pytest.mark.smoke
+@pytest.mark.regression
 def test_authorization(driver):
     login(driver)
 
@@ -93,33 +62,32 @@ def test_authorization(driver):
     assert driver.find_elements(*PRODUCTS)
 
 
-# Задания 2.1 и 2.2. Товары и корзина
-def test_products_and_cart(driver):
+# Задание 1.2. Добавление товара в корзину
+@pytest.mark.smoke
+@pytest.mark.regression
+def test_add_product_to_cart(driver):
     wait = login(driver)
 
-    products = wait.until(EC.visibility_of_all_elements_located(PRODUCTS))
-    assert len(products) >= 3
-
-    print("Первые три товара:")
-    for product in products[:3]:
-        name = product.find_element(*PRODUCT_NAME).text
-        price = product.find_element(*PRODUCT_PRICE).text
-        print(f"{name}: {price}")
-
-    wait.until(EC.element_to_be_clickable(BACKPACK_BUTTON)).click()
+    wait.until(EC.element_to_be_clickable(ADD_BACKPACK)).click()
     wait.until(EC.text_to_be_present_in_element(CART_BADGE, "1"))
-    wait.until(EC.element_to_be_clickable(CART)).click()
-    wait.until(EC.url_contains("cart.html"))
 
-    product_in_cart = wait.until(
-        EC.visibility_of_element_located(CART_PRODUCT_NAME)
-    )
-    assert product_in_cart.text == "Sauce Labs Backpack"
-
-    driver.save_screenshot(str(SCREENSHOTS / "cart.png"))
+    assert driver.find_element(*CART_BADGE).text == "1"
 
 
-# Задание 3.1. Сортировка Price (high to low)
+# Задание 1.2. Удаление товара из корзины
+@pytest.mark.regression
+def test_remove_product_from_cart(driver):
+    wait = login(driver)
+
+    wait.until(EC.element_to_be_clickable(ADD_BACKPACK)).click()
+    wait.until(EC.element_to_be_clickable(REMOVE_BACKPACK)).click()
+    wait.until(EC.invisibility_of_element_located(CART_BADGE))
+
+    assert not driver.find_elements(*CART_BADGE)
+
+
+# Задание 1.2. Сортировка Price (high to low)
+@pytest.mark.regression
 def test_sorting(driver):
     wait = login(driver)
 
@@ -132,58 +100,46 @@ def test_sorting(driver):
     )
     prices = get_prices(driver)
 
-    assert prices[0] == max(prices)
-    print(f"Цены по убыванию: {prices}")
+    assert prices == sorted(prices, reverse=True)
 
 
-# Дополнительное задание 3.2. Действия мышью
-def test_mouse_actions(driver):
-    wait = login(driver)
-
-    image = wait.until(EC.visibility_of_element_located(PRODUCT_IMAGE))
-    button = wait.until(EC.element_to_be_clickable(BACKPACK_BUTTON))
-
-    ActionChains(driver).move_to_element(image).perform()
-    ActionChains(driver).context_click(button).perform()
-    ActionChains(driver).send_keys(Keys.ESCAPE).perform()
-
-    assert button.text == "Add to cart"
-    print("Выполнены наведение и правый клик")
-
-
-# Задание 4.1. Работа с новой вкладкой
-def test_new_tab(driver):
-    wait = login(driver)
-
-    original_tab = driver.current_window_handle
-    old_tabs = driver.window_handles
-    wait.until(EC.element_to_be_clickable(SOCIAL_X)).click()
-
-    wait.until(EC.number_of_windows_to_be(2))
-    new_tab = next(tab for tab in driver.window_handles if tab not in old_tabs)
-    driver.switch_to.window(new_tab)
-
-    wait.until(lambda browser: "x.com" in browser.current_url)
-    assert "x.com" in driver.current_url
-    print(f"URL новой вкладки: {driver.current_url}")
-
-    driver.close()
-    driver.switch_to.window(original_tab)
-    assert "inventory.html" in driver.current_url
-
-
-# Задание 5.1. Негативный сценарий и скриншот ошибки
-def test_locked_user(driver):
+# Задание 1.2. Выход из системы
+@pytest.mark.regression
+def test_logout(driver):
     wait = login(driver)
 
     wait.until(EC.element_to_be_clickable(MENU)).click()
     wait.until(EC.element_to_be_clickable(LOGOUT)).click()
     wait.until(EC.url_to_be(URL))
-    wait.until(EC.visibility_of_element_located(USERNAME))
 
-    enter_credentials(driver, "locked_out_user")
-    error = wait.until(EC.visibility_of_element_located(ERROR))
+    assert driver.find_element(*LOGIN_BUTTON).is_displayed()
 
-    assert "locked out" in error.text
-    driver.save_screenshot(str(SCREENSHOTS / "locked_user_error.png"))
 
+# Задание 2.1. Параметризованный тест авторизации
+@pytest.mark.regression
+@pytest.mark.parametrize(
+    "username, expected_result",
+    [
+        ("standard_user", "success"),
+        ("locked_out_user", "locked"),
+        ("problem_user", "success"),
+        ("performance_glitch_user", "success"),
+    ],
+)
+def test_authorization_with_different_users(
+    driver,
+    username,
+    expected_result,
+):
+    driver.get(URL)
+    enter_credentials(driver, username)
+
+    wait_time = 20 if username == "performance_glitch_user" else WAIT_TIME
+    wait = WebDriverWait(driver, wait_time)
+
+    if expected_result == "locked":
+        error = wait.until(EC.visibility_of_element_located(ERROR))
+        assert "locked out" in error.text
+    else:
+        wait.until(EC.url_contains("inventory.html"))
+        assert "inventory.html" in driver.current_url
