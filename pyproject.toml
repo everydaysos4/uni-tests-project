@@ -3,17 +3,21 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "selenium-lab-02"
+name = "selenium-lab-03"
 version = "1.0.0"
-description = "Лабораторная работа №2 по Selenium WebDriver"
+description = "Лабораторная работа №3 по PyTest и GitHub Actions"
 requires-python = ">=3.10"
 dependencies = [
     "pytest>=8.0",
     "selenium>=4.20",
-    "webdriver-manager>=4.0",
+    "pytest-html>=4.1",
 ]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
-addopts = "-v -s"
+addopts = "-v"
+markers = [
+    "smoke: быстрые проверки основного функционала",
+    "regression: полный набор регрессионных проверок",
+]
